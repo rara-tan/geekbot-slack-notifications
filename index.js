@@ -3,9 +3,9 @@ const github = require('@actions/github');
 const script = require('./script');
 
 (async () => {
-  const questionIds = core.getInput('question_ids').split(',').trim();
+  const questionIds = core.getInput('question_ids').trim().split(',');
   const standupId = core.getInput('standup_id');
-  const members = core.getInput('members').split(',').trim();
+  const members = core.getInput('members').trim().split(',');
   try {
     const result = await script({
       geekbotApiKey: core.getInput('geekbot_api_key'),
