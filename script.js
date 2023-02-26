@@ -96,6 +96,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     return slackMessage
   })
   console.log(slackMessages);
+  console.log("end");
 
   return {
     attachments: [

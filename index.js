@@ -16,6 +16,8 @@ const fetch = require('node-fetch-commonjs');
       standupId,
       members
     });
+    console.log("returned");
+    console.log(result);
     core.setOutput(result);
   } catch (error) {
     core.setFailed(error.message);
