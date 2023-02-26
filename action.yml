@@ -18,7 +18,7 @@ inputs:
     required: true
   members:
     description: 'Geekbot Member Id'
-    required: true
+    required: truea
 runs:
   using: 'node16'
   main: 'index.js'
