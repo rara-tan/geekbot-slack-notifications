@@ -18,5 +18,5 @@ outputs:
   slack_format_json:
     description: 'Slack format json'
 runs:
-  using: 'node16'
+  using: 'node18'
   main: 'index.js'
