@@ -2,8 +2,6 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
   const d = new Date()
   const dateAfter = parseInt(d.setDate(d.getDate() - 7) / 1000)
 
-  console.log("aa");
-  return;
   const reportResults = await Promise.all(
     members.map(async (member) => {
       const userId = member
@@ -17,6 +15,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
         const res = await fetch(`https://api.geekbot.com/v1/reports?${query}`, {
           headers: { Authorization: geekbotApiKey },
         })
+        console.log(res);
         if (!res.ok) {
           return {
             isSuccess: false,
