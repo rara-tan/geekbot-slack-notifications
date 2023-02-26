@@ -18,10 +18,8 @@ const fetch = require('node-fetch-commonjs');
     });
     console.log("returned");
     console.log(result);
-    core.setOutput(result);
   } catch (error) {
     core.setFailed(error.message);
   }
-  core.setOutput(standupId);
 })();
 
