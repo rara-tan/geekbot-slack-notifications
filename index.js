@@ -3,12 +3,12 @@ const github = require('@actions/github');
 const script = require('./script');
 
 (async () => {
-  const questionIds = process.env.question_ids.split(',').trim();
-  const standupId = process.env.standup_id;
-  const members = process.env.members.split(',').trim();
+  const questionIds = core.getInput(question_ids).split(',').trim();
+  const standupId = core.getInput(standup_id);
+  const members = core.getInput(members).split(',').trim();
   try {
     const result = await script({
-      geekbotApiKey: process.env.geekbot_api_key,
+      geekbotApiKey: core.getInput(geekbot_api_key),
       fetch,
       core,
       questionIds,
