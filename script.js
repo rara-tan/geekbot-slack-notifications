@@ -4,7 +4,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
 
   const reportResults = await Promise.all(
     members.map(async (member) => {
-      const userId = member.id
+      const userId = member
       const query = new URLSearchParams({
         question_ids: questionIds,
         standup_id: standupId,
@@ -53,9 +53,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     const slackMessage = {
       mrkdwn_in: ['text'],
       color: Math.floor(Math.random() * 16777215).toString(16), // random color
-      author_name: members.find(
-        (member) => member.id === report.userId,
-      ).name,
+      author_name: "test"
     }
 
     // Fetch Error
