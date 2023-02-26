@@ -16,9 +16,9 @@ inputs:
   standup_id:
     description: 'Geekbot Stabdup Id'
     required: true
-  amembers:
+  members:
     description: 'Geekbot Member Id'
-    required: truea
+    required: true
 runs:
   using: 'node16'
   main: 'index.js'
