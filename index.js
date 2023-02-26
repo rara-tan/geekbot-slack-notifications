@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const script = require('./script');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch-commonjs');
 
 (async () => {
   const questionIds = core.getInput('question_ids').trim().split(',');
