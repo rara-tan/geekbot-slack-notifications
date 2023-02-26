@@ -50,6 +50,7 @@ module.exports = async ({ geekbotApiKey, slackBotToken, slackChannelName, fetch,
   )
 
   const slackMessages = reportResults.map((report) => {
+    console.log(report)
     const slackMessage = {
       mrkdwn_in: ['text'],
       color: Math.floor(Math.random() * 16777215).toString(16), // random color
