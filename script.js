@@ -77,11 +77,13 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     const answeredReports = report.contents.filter(
       (content) => content.questions.length > 0,
     )
+    console.log(answeredReports);
     if (answeredReports.length === 0) {
       slackMessage.text = `No Questions`
       return slackMessage
     }
 
+    console.log("aa");
     slackMessage.fields = answeredReports.map((report) => {
       const d = new Date(report.timestamp * 1000)
       return {
@@ -90,8 +92,10 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
         short: false,
       }
     })
+    console.log(slackMessage);
     return slackMessage
   })
+  console.log(slackMessages);
 
   return {
     attachments: [
