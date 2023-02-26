@@ -50,11 +50,10 @@ module.exports = async ({ geekbotApiKey, slackBotToken, slackChannelName, fetch,
   )
 
   const slackMessages = reportResults.map((report) => {
-    console.log(report)
     const slackMessage = {
       mrkdwn_in: ['text'],
       color: Math.floor(Math.random() * 16777215).toString(16), // random color
-      author_name: "test"
+      author_name: report.userId
     }
 
     // Fetch Error
@@ -63,16 +62,19 @@ module.exports = async ({ geekbotApiKey, slackBotToken, slackChannelName, fetch,
       return slackMessage
     }
 
+    const contents = report.contents
     // No Contents
-    if (report.contents.length === 0) {
+    if (contents.length === 0) {
       slackMessage.text = `No Contents`
       return slackMessage
     }
 
     // No Questions
-    const answeredReports = report.contents.filter(
+    const answeredReports = contents.filter(
       (content) => content.questions.length > 0,
     )
+    // slackMessage.author_name = contents[0];
+    console.log(contents[0].member)
     if (answeredReports.length === 0) {
       slackMessage.text = `No Questions`
       return slackMessage
