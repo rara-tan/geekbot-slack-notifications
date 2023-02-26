@@ -2,6 +2,8 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
   const d = new Date()
   const dateAfter = parseInt(d.setDate(d.getDate() - 7) / 1000)
 
+  console.log("aa");
+  return;
   const reportResults = await Promise.all(
     members.map(async (member) => {
       const userId = member
