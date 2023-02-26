@@ -73,8 +73,8 @@ module.exports = async ({ geekbotApiKey, slackBotToken, slackChannelName, fetch,
     const answeredReports = contents.filter(
       (content) => content.questions.length > 0,
     )
-    // slackMessage.author_name = contents[0];
-    console.log(contents[0].member)
+    slackMessage.author_name = contents[0].realname;
+
     if (answeredReports.length === 0) {
       slackMessage.text = `No Questions`
       return slackMessage
