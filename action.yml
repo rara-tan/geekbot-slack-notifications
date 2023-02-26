@@ -16,7 +16,7 @@ inputs:
   standup_id:
     description: 'Geekbot Stabdup Id'
     required: true
-  members:
+  amembers:
     description: 'Geekbot Member Id'
     required: truea
 runs:
