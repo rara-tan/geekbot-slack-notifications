@@ -1,13 +1,22 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Geekbot Slack Notifications'
+description: 'Notify Geekbot Weekly Report to Slack'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  geekbot_api_key:
+    description: 'Geekbot API Key'
     required: true
     default: 'World'
+  question_ids:
+    description: 'Geekbot Question Ids'
+    required: true
+  standup_id:
+    description: 'Geekbot Stabdup Id'
+    required: true
+  members:
+    description: 'Geekbot Member Id'
+    required: true
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  slack_format_json:
+    description: 'Slack format json'
 runs:
   using: 'node16'
   main: 'index.js'
