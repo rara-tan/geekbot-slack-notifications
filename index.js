@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const script = require('./script');
 
 try {
-  script({
+  const result = await script({
     geekbotApiKey: process.env.geekbot_api_key,
     fetch,
     core,
@@ -11,6 +11,7 @@ try {
     standupId, process.env.standup_id,
     members, process.env.members
   });
+  core.setOutput(result);
 } catch (error) {
   core.setFailed(error.message);
 }
