@@ -12,6 +12,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
         after: dateAfter,
       }).toString()
       try {
+        console.log(query);
         const res = await fetch(`https://api.geekbot.com/v1/reports?${query}`, {
           headers: { Authorization: geekbotApiKey },
         })
