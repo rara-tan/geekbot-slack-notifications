@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const script = require('./script');
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
 (async () => {
   const questionIds = core.getInput('question_ids').trim().split(',');
