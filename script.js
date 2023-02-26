@@ -1,4 +1,4 @@
-module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, members }) => {
+module.exports = async ({ geekbotApiKey, slackBotToken, slackChannelName, fetch, core, questionIds, standupId, members }) => {
   const d = new Date()
   const dateAfter = parseInt(d.setDate(d.getDate() - 7) / 1000)
 
@@ -12,11 +12,9 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
         after: dateAfter,
       }).toString()
       try {
-        console.log(query);
         const res = await fetch(`https://api.geekbot.com/v1/reports?${query}`, {
           headers: { Authorization: geekbotApiKey },
         })
-        console.log(res);
         if (!res.ok) {
           return {
             isSuccess: false,
@@ -24,7 +22,6 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
             message: 'server error',
           }
         }
-        console.log(res.ok);
         let contents
         try {
           contents = await res.json()
@@ -35,7 +32,6 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
             message: 'json error',
           }
         }
-        console.log(contents);
         return {
           isSuccess: true,
           userId,
@@ -53,7 +49,6 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     }),
   )
 
-  console.log(reportResults);
   const slackMessages = reportResults.map((report) => {
     const slackMessage = {
       mrkdwn_in: ['text'],
@@ -77,13 +72,11 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     const answeredReports = report.contents.filter(
       (content) => content.questions.length > 0,
     )
-    console.log(answeredReports);
     if (answeredReports.length === 0) {
       slackMessage.text = `No Questions`
       return slackMessage
     }
 
-    console.log("aa");
     slackMessage.fields = answeredReports.map((report) => {
       const d = new Date(report.timestamp * 1000)
       return {
@@ -92,19 +85,28 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
         short: false,
       }
     })
-    console.log(slackMessage);
     return slackMessage
   })
-  console.log(slackMessages);
-  console.log("end");
 
-  return {
-    attachments: [
-      {
-        mrkdwn_in: ['text'],
-        text: ':robot_face: Hello! The completed tasks of the team members over the past 1 week are as follows',
+  try {
+    fetch('https://slack.com/api/chat.postMessage', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${slackBotToken}`
       },
-      ...slackMessages,
-    ],
+      body: JSON.stringify({
+        channel: slackChannelName,
+        attachments: [
+          {
+            mrkdwn_in: ['text'],
+            text: ':robot_face: Hello! The completed tasks of the team members over the past 1 week are as follows',
+          },
+          ...slackMessages,
+        ],
+      })
+    });
+  } catch (err) {
+    core.error(err);
   }
 }

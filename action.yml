@@ -4,7 +4,12 @@ inputs:
   geekbot_api_key:
     description: 'Geekbot API Key'
     required: true
-    default: 'World'
+  slack_bot_token:
+    description: 'Slack Bot Token'
+    required: true
+  slack_channel_name:
+    description: 'Slack Channel Name'
+    required: true
   question_ids:
     description: 'Geekbot Question Ids'
     required: true
@@ -14,9 +19,6 @@ inputs:
   members:
     description: 'Geekbot Member Id'
     required: true
-outputs:
-  slack_format_json:
-    description: 'Slack format json'
 runs:
   using: 'node16'
   main: 'index.js'
