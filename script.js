@@ -24,6 +24,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
             message: 'server error',
           }
         }
+        console.log(res.ok);
         let contents
         try {
           contents = await res.json()
@@ -34,6 +35,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
             message: 'json error',
           }
         }
+        console.log(contents);
         return {
           isSuccess: true,
           userId,
@@ -51,6 +53,7 @@ module.exports = async ({ geekbotApiKey, fetch, core, questionIds, standupId, me
     }),
   )
 
+  console.log(reportResults);
   const slackMessages = reportResults.map((report) => {
     const slackMessage = {
       mrkdwn_in: ['text'],
